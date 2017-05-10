@@ -20,7 +20,7 @@
 	echo "Query @ Value: ";
 	$stmt = $db->prepare("SELECT * FROM test WHERE id = ?;"); //returns STMT obj
 	
-	$stmt->bind_param("s", strlen($input)); //returns boolean
+	$stmt->bind_param("i", strlen($input)); //returns boolean
 
 	$stmt->execute(); //returns boolean
 
