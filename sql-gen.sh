@@ -45,11 +45,28 @@ do
 		then
 			pos=$field
 			value=decl
+		elif [ "$value" == "decl" ]
+		then
+			if [[ "$field" == *"["* ]]
+			then
+				mod=$field
+				value=colon
+			else
+				decl="$decl $field"
+				if [[ "$field" != *"("* ]]
+				then
+					value=mod
+				fi
+			fi
+		elif [ "$value" == "mod" ]
+		then
+			mod=$field
+			value=colon
 		fi
 	done
 
 	#echo $word
-	add-entry "$word" "$pos" 'test' 'test' 'test'
+	add-entry "$word" "$pos" "$decl" 'test' 'test'
 
 	#echo "$word \t $wtype \t $mod \t $def"
 	# TODO set empy vals to NULL
