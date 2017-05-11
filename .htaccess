@@ -1,7 +1,3 @@
-<files latin.php>
-order allow,deny
-deny from all
-</files>
 <files .db-password.txt>
 order allow,deny
 deny from all
