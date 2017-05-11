@@ -37,3 +37,4 @@ Oh yeah, and it looks pretty 00's, so I figured I'd give it a facelift by using 
 * Better Searching
 * Search Speed Optimization
 * Cleanup Index/PHP
+* Seperate WORD column into 4 cols
