@@ -2,7 +2,7 @@
 
 Latin Translator, built with Whitaker's Words, jQuery, & Bootstrap!
 
-Here is the [current working build](darkstonelabs.com/tests/) of the site.
+Here is the [current working build](http://darkstonelabs.com/tests/) of the site.
 
 ## The Original App
 
@@ -122,8 +122,8 @@ Alright, let's talk about that last one. I mostly used regex matching to categor
 ## TODO
 
 * Conjugations
-* Better Searching
-* Search Speed Optimization
+* Better Searching - don't do alphabetical, and fuzzy search?
+* Search/SQL Query Speed Optimization
 * Cleanup Index/PHP
 * Seperate WORD column into 4 cols
 * PHP Return Associative Array, Handle JSON Object in JavaScript
