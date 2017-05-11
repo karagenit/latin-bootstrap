@@ -2,7 +2,7 @@
 
 Latin Translator, built with Whitaker's Words, jQuery, & Bootstrap!
 
-[Here is the current working build of the site.](darkstonelabs.com/tests/)
+Here is the [current working build](darkstonelabs.com/tests/) of the site.
 
 ## The Original App
 
@@ -64,7 +64,7 @@ This is significantly truncated - all of the output code (including special test
 
 > **Protip:** don't hard code your database passwords
 
-So, yeah, that's a thing I did. And then I pushed the file to github.
+So, yeah, that's a thing I did. And then I pushed the file to github. With the password in it. In plaintext.
 
 *No, you can't find it now, not even if you look through each and every one of my previous commits*. I used `git filter-branch --tree-filter 'rm -f latin.php' HEAD` to recurse through each previous commit and remove the file. That's why you'll see a few commits that are totally empty - the file that was originally changed by that commit was removed.
 
@@ -81,6 +81,16 @@ After running `filter-branch` I realized there were a few commits on `origin` I 
 I mean, it *will* work ... not only will users not be able to navigate to that file, but any other page that tries to GET/POST to it will get a `403 Access Denied`. There really isn't any way to prevent users from "accidentally" visiting the straight PHP file ... just make sure it doesn't do anything weird when there isn't any input.
 
 ## SQL Database
+
+Here's the [original plaintext database](http://archives.nd.edu/whitaker/dictpage.htm) that this site uses to lookup definitions - it's also the database used by the original Words program. For ease of use, I wrote a script which parsed the file and stuck the data in an SQL database.
+
+#### Setting Up MySQL/MariaDB
+
+This took me about an hour to get working, as I'd never worked with MySQL specifically before. For whatever reason, the service *just would not start*. I scoured Stack Overflow & other forms to no avail, so I began searching through all of the log files it created. One of them mentioned that I may have an improper configuration file, so I began comparing my local config files to "defaults" I found online. 
+
+In particular, I found differences in my `/etc/my.cnf`. Specifically, I saw that many of the directory settings (which usually point to `/var/`) were pointing to `/mnt/ram4/var/`. Removing this prefix seemed to clear up my issue - I was immediately able to start the MySQL server.
+
+After that, I had a couple issues with permissions. First, obviously, I had to configure my user with access to all databases. I also had to remove the `old_passwords=1` line from `/etc/my.cnf` ... I'm not sure what that did, but the DB was complaining about it (and taking it out seemed to fix it).
 
 ## Bash SQL Generator
 
