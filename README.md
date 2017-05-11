@@ -1,6 +1,8 @@
 # Latin Final Project
 
-Latin Translator, built with Whitaker's Words, jQuery, & Bootstrap
+Latin Translator, built with Whitaker's Words, jQuery, & Bootstrap!
+
+[Here is the current working build of the site.](darkstonelabs.com/tests/)
 
 ## The Original App
 
@@ -37,7 +39,7 @@ $("input").keyup(function(){
 				document.getElementById("output").innerHTML = data;
 			}
 		});
-	});
+});
 ```
 
 Here we're using `jQuery 2.1.3`. When the user types in the search bar, it sends an asynchronous request back to `latin.php` with the text in the search bar, and then displays the results of the request.
@@ -65,6 +67,8 @@ This is significantly truncated - all of the output code (including special test
 So, yeah, that's a thing I did. And then I pushed the file to github.
 
 *No, you can't find it now, not even if you look through each and every one of my previous commits*. I used `git filter-branch --tree-filter 'rm -f latin.php' HEAD` to recurse through each previous commit and remove the file. That's why you'll see a few commits that are totally empty - the file that was originally changed by that commit was removed.
+
+But, hey, when you overwrite a bunch of commits, github counts them as new contributions ... I did 55 things yesterday!
 
 > **Protip:** before doing major repo changes, make sure you're sync'd with your remote
 
