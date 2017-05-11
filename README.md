@@ -23,11 +23,44 @@ Oh yeah, and it looks pretty 00's, so I figured I'd give it a facelift by using 
 
 ## AJAX through jQuery
 
+Here's a code snippet for you:
+
+```JavaScript
+$("input").keyup(function(){
+		console.log("Posting");
+		$.ajax({
+			type: "POST",
+			url: "latin.php",
+			datatype: "html",
+			data: {input: document.getElementById("input").value},
+			success: function(data) {
+				document.getElementById("output").innerHTML = data;
+			}
+		});
+	});
+```
+
+Here we're using `jQuery 2.1.3`. When the user types in the search bar, it sends an asynchronous request back to `latin.php` with the text in the search bar, and then displays the results of the request.
+
 ## PHP
 
-## Bash SQL Generator
+The server-side PHP handles the database query requests from the user. Some more code:
+
+```PHP
+$input = $_POST['input'];
+$db = new mysqli("localhost");
+$stmt = $db->prepare("SELECT * FROM latin WHERE word LIKE ? LIMIT 1"); //returns STMT obj
+$query_input = "%".$input."%";
+$stmt->bind_param("s", $query_input); //returns boolean
+$stmt->execute(); //returns boolean
+$result = $stmt->get_result();
+```
+
+This is significantly truncated - all of the output code (including special test cases) has been taken out for simplicity's sake. Still - you can see the process of connecting to the SQL database and running a query on it. One of the fancier things is the use of a *prepared SQL statement*, which can allow for greater efficiency when running multiple queries and prevent SQL injection attacks (it forces the user input to be treated as a literal string).
 
 ## SQL Database
+
+## Bash SQL Generator
 
 ## Bootstrap
 
@@ -38,3 +71,6 @@ Oh yeah, and it looks pretty 00's, so I figured I'd give it a facelift by using 
 * Search Speed Optimization
 * Cleanup Index/PHP
 * Seperate WORD column into 4 cols
+* PHP Return Associative Array, Handle JSON Object in JavaScript
+* Nicer CSS for results: boxes around each entry, color each field
+* Cache prepared statement?
