@@ -62,14 +62,20 @@ do
 		then
 			mod=$field
 			value=colon
+		elif [ "$value" == "colon" ] 
+		then
+			value=def
+		elif [ "$value" == "def" ]
+		then
+			parse=`echo $field | sed -E "s/'//"`
+			def="$def $parse"
 		fi
 	done
 
 	#echo $word
-	add-entry "$word" "$pos" "$decl" 'test' 'test'
+	add-entry "$word" "$pos" "$decl" "$mod" "$def"
 
 	#echo "$word \t $wtype \t $mod \t $def"
-	# TODO set empy vals to NULL
 	# add-entry $word $wtype $mod $def
 done < dictionary.txt
 
