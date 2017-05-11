@@ -49,14 +49,32 @@ The server-side PHP handles the database query requests from the user. Some more
 ```PHP
 $input = $_POST['input'];
 $db = new mysqli("localhost");
-$stmt = $db->prepare("SELECT * FROM latin WHERE word LIKE ? LIMIT 1"); //returns STMT obj
+$stmt = $db->prepare("SELECT * FROM latin WHERE word LIKE ? LIMIT 1");
 $query_input = "%".$input."%";
-$stmt->bind_param("s", $query_input); //returns boolean
-$stmt->execute(); //returns boolean
+$stmt->bind_param("s", $query_input); 
+$stmt->execute(); 
 $result = $stmt->get_result();
 ```
 
 This is significantly truncated - all of the output code (including special test cases) has been taken out for simplicity's sake. Still - you can see the process of connecting to the SQL database and running a query on it. One of the fancier things is the use of a *prepared SQL statement*, which can allow for greater efficiency when running multiple queries and prevent SQL injection attacks (it forces the user input to be treated as a literal string).
+
+#### A Big 'ol Goof
+
+> **Protip:** don't hard code your database passwords
+
+So, yeah, that's a thing I did. And then I pushed the file to github.
+
+*No, you can't find it now, not even if you look through each and every one of my previous commits*. I used `git filter-branch --tree-filter 'rm -f latin.php' HEAD` to recurse through each previous commit and remove the file. That's why you'll see a few commits that are totally empty - the file that was originally changed by that commit was removed.
+
+> **Protip:** before doing major repo changes, make sure you're sync'd with your remote
+
+After running `filter-branch` I realized there were a few commits on `origin` I didn't have locally ... pulling caused merge conflicts, so I ended up having to drop a couple commits (they were just edits to README, which I copied in later).
+
+#### HTAccess
+
+> **Protip:** don't add your PHP files to your `.htaccess` - it won't work!
+
+I mean, it *will* work ... not only will users not be able to navigate to that file, but any other page that tries to GET/POST to it will get a `403 Access Denied`. There really isn't any way to prevent users from "accidentally" visiting the straight PHP file ... just make sure it doesn't do anything weird when there isn't any input.
 
 ## SQL Database
 
