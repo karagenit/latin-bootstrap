@@ -26,10 +26,7 @@ do
 	for i in `seq 1 $maxind`
 	do
 		field=`echo $line | awk -v i="$i" '{ print $i }'`
-
-		#if :: - do nothing, value=def
-		#if [*] - value=mod
-		#if *, - value=word
+		echo $field
 
 		if [ "$value" == "word" ]
 		then
