@@ -60,6 +60,8 @@ $result = $stmt->get_result();
 
 This is significantly truncated - all of the output code (including special test cases) has been taken out for simplicity's sake. Still - you can see the process of connecting to the SQL database and running a query on it. One of the fancier things is the use of a *prepared SQL statement*, which can allow for greater efficiency when running multiple queries and prevent SQL injection attacks (it forces the user input to be treated as a literal string).
 
+I used [this](http://php.net/manual/en/book.mysqli.php) site as a starting point for setting up the MySQLi queries.
+
 #### A Big 'ol Goof
 
 > **Protip:** don't hard code your database passwords
@@ -92,7 +94,28 @@ In particular, I found differences in my `/etc/my.cnf`. Specifically, I saw that
 
 After that, I had a couple issues with permissions. First, obviously, I had to configure my user with access to all databases. I also had to remove the `old_passwords=1` line from `/etc/my.cnf` ... I'm not sure what that did, but the DB was complaining about it (and taking it out seemed to fix it).
 
+#### Dictionary Database Configuration
+
+`CREATE TABLE latin (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, word CHAR(64) NOT NULL, part CHAR(16) NOT NULL, declension CHAR(16), modifier CHAR(16), definition CHAR(128) NOT NULL);`
+
+I used [this](http://www.wikihow.com/Create-a-Database-in-MySQL) guide for setting up the DB. 
+
 ## Bash SQL Generator
+
+To place all of the data into the SQL database, I wrote a bash script to parse the text file and make SQL insertions. Funny enough, I actually remembered *not to hard code the DB password* for this file.
+
+#### Awk & Sed
+
+The script does the following:
+
+1. Iterate through each line in the file
+2. Separate records using `awk`
+3. Remove excess delimiting characters with `sed`
+4. Based on current/previous record, determine which column this record belongs in
+
+Alright, let's talk about that last one. I mostly used regex matching to categorize each record. For example, if we are currently writing to the `word` column and this record ends in a comma, the next record should also write to `word`. Or, another example, if this record starts/ends with [] we know that we should write it to `modifier`. 
+
+> **Protip:** when you run this script over ssh, use [screen](https://www.howtogeek.com/howto/ubuntu/keep-your-ssh-session-running-when-you-disconnect/) or something ... it might take a while!
 
 ## Bootstrap
 
