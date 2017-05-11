@@ -11,12 +11,15 @@ function add-entry {
 	mysql -u techhound -p$pword -D dict -e "INSERT INTO latin (id, word, part, declension, modifier, definition) VALUES (NULL, '$word', '$pos', '$decl', '$mod', '$def');"
 }
 
+# TODO on startup, DELETE FROM latin
+
 while read line
 do
 	value=word
 	maxind=`echo $line | awk '{ print NF }'`
 	word=""
-	wtype=""
+	pos=""
+	decl=""
 	mod=""
 	def=""
 
@@ -30,7 +33,7 @@ do
 
 		if [ "$value" == "word" ]
 		then
-			parse=`echo $field | sed -E "s/[#]{0,}([A-Za-z.]{1,})[,]{0,}/\\1/"`
+			parse=`echo $field | sed -E "s/[#]{0,}([A-Za-z.-]{1,})[,]{0,}/\\1/"`
 			word="$word $parse"
 				
 			if [[ $field != *","* ]]
@@ -40,9 +43,13 @@ do
 		fi
 	done
 
-	echo $word
+	#echo $word
+	add-entry "$word" 'test' 'test' 'test' 'test'
 
 	#echo "$word \t $wtype \t $mod \t $def"
 	# TODO set empy vals to NULL
 	# add-entry $word $wtype $mod $def
 done < dictionary.txt
+
+# TODO progress bar
+# TODO prompt for user/pass
