@@ -35,7 +35,7 @@
 	    <div class="input-group input-group-lg">
 	      <input type="text" class="form-control" autocomplete="off" placeholder="Enter Latin..." id="input" name="input">
 	      <span class="input-group-btn">
-		<button class="btn btn-default" type="button">CLEAR</button>
+		<button class="btn btn-default" id="clear" onclick="clearInput();" type="button">X</button>
 	      </span>
 	    </div>
 	  </div>
@@ -70,5 +70,10 @@
 	});
     </script>
 
-
+    <script type="text/javascript">
+	function clearInput() {
+		console.log("Clearing");
+		document.getElementById("input").value = "";
+	}
+    </script>
 </html>
