@@ -69,6 +69,8 @@ do
 		fi
 	done
 
+	word=`echo $word | sed -E "s/ //"` #not sure why but it adds an extra space...
+
 	#echo $word
 	add-entry "$word" "$pos" "$decl" "$mod" "$def"
 
