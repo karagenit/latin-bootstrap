@@ -135,15 +135,3 @@ Oh, and of course we have this gem:
 Adding that empty column for spacing ... *and* adding the offset class to the main column ... but for some reason, taking one out breaks it on either Desktop or Mobile. 
 
 Oh, and there's a `<p><br></p>` stuck in there cause I don't know how to use margins apparently.
-
-## TODO
-
-* Conjugations
-* Better Searching - don't do alphabetical, and fuzzy search?
-* Search/SQL Query Speed Optimization
-* Cleanup Index/PHP
-* Seperate WORD column into 4 cols
-* PHP Return Associative Array, Handle JSON Object in JavaScript
-* Nicer CSS for results: boxes around each entry, color each field
-* Cache prepared statement?
-* Script to build SQL table
