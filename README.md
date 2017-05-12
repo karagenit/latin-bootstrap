@@ -119,6 +119,23 @@ Alright, let's talk about that last one. I mostly used regex matching to categor
 
 ## Bootstrap
 
+I used [Bootstrap](https://getbootstrap.com) to build the web interface. Specifically, I based it on the Jumbotron example/template, though I ultimately scrapped pretty much everything that originally existed besides fonts and a couple styles.
+
+Oh, and of course we have this gem:
+
+```HTML
+<div class="row marketing">
+	<div class="col-md-3"></div>
+	<div class="col-md-6 col-md-offset-3">
+		<p id="output">Well, what are you waiting for?<br>Search something already!</p>
+	</div>
+</div>
+```
+
+Adding that empty column for spacing ... *and* adding the offset class to the main column ... but for some reason, taking one out breaks it on either Desktop or Mobile. 
+
+Oh, and there's a `<p><br></p>` stuck in there cause I don't know how to use margins apparently.
+
 ## TODO
 
 * Conjugations
@@ -129,3 +146,4 @@ Alright, let's talk about that last one. I mostly used regex matching to categor
 * PHP Return Associative Array, Handle JSON Object in JavaScript
 * Nicer CSS for results: boxes around each entry, color each field
 * Cache prepared statement?
+* Script to build SQL table
