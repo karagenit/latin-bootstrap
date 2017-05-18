@@ -1,4 +1,4 @@
-<files .db-password.txt>
+<files *.db>
 order allow,deny
 deny from all
 </files>

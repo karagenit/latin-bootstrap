@@ -1,3 +1,3 @@
 *.swp
 src-bootstrap/
-.db-password.txt
+*.db
