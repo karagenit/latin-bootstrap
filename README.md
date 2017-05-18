@@ -136,6 +136,20 @@ Adding that empty column for spacing ... *and* adding the offset class to the ma
 
 Oh, and there's a `<p><br></p>` stuck in there cause I don't know how to use margins apparently.
 
-## Database Files
+## A Great Migration
+
+Mere days before I was to present this project to my Latin class, the server on which I previously hosted the site was taken down (it's owner was moving and had everything unplugged). As a result, I was forced to migrate my project to the techhounds web server. While this was stressful, it ultimately made me realize some of the key issues with how I had things set up.
+
+#### Installing MySQL
+
+My previous server already had MySQL installed. However, the new server did not. 
+
+> **Protip:** installing `mysql` only installs the client, you also need to install `mysql-server`!
+
+#### Database Files
+
+The first of which has to do with MySQL and how I handled users/passwords. I talked about the security issue to hardcoding the password, but it's also inconvenient to hardcode usernames/database names etc.
 
 You'll notice that in both the `.htaccess` and the `.gitignore` any file matching `*.db` is ignored/forbidden. These files are used to access the MySQL database. Specifically, `.username.db` holds the database username, `.password.db` holds that user's password, and `.database.db` holds the database name.
+
+#### Database Table Setup Script
