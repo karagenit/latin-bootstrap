@@ -155,3 +155,11 @@ You'll notice that in both the `.htaccess` and the `.gitignore` any file matchin
 #### Database Table Setup Script
 
 `CREATE DATABASE dict;`
+
+## The Easy Way
+
+After having to build the MySQL database for a second time, I realized there were a couple neat tricks that would make the process easier. 
+
+> **Protip:** use `screen` to run the `sql-gen` script in the background - when you disconnect from SSH, it won't stop building!
+
+> **Protip:** PHP stores logs in `/var/log/httpd` ... use them to your advantage!
