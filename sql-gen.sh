@@ -28,7 +28,6 @@ do
 	for i in `seq 1 $maxind`
 	do
 		field=`echo $line | awk -v i="$i" '{ print $i }'`
-		echo $field
 
 		if [ "$value" == "word" ]
 		then
@@ -72,7 +71,7 @@ do
 
 	word=`echo $word | sed -E "s/[ ]{0,1}//"` #not sure why but it adds an extra space...
 
-	#echo $word
+	echo $word
 	add-entry "$word" "$pos" "$decl" "$mod" "$def"
 
 	#echo "$word \t $wtype \t $mod \t $def"
