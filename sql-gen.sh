@@ -1,6 +1,8 @@
 #!/bin/bash
 
-pword=$1
+pword=`cat .password.db`
+uname=`cat .username.db`
+dname=`cat .database.db`
 
 function add-entry {
 	word=$1
@@ -8,7 +10,7 @@ function add-entry {
 	decl=$3
 	mod=$4
 	def=$5
-	mysql -u techhound -p$pword -D dict -e "INSERT INTO latin (id, word, part, declension, modifier, definition) VALUES (NULL, '$word', '$pos', '$decl', '$mod', '$def');"
+	mysql -u $uname -p$pword -D $dname -e "INSERT INTO latin (id, word, part, declension, modifier, definition) VALUES (NULL, '$word', '$pos', '$decl', '$mod', '$def');"
 }
 
 # TODO on startup, DELETE FROM latin
@@ -31,7 +33,6 @@ do
 		if [ "$value" == "word" ]
 		then
 			parse=`echo $field | sed -E "s/[#]{0,}([A-Za-z.-]{1,})[,]{0,}/\\1/"`
-			# odd behavior note: with [A-Za-z.] instead, it still keeps -, entries, AND keeps the ,
 			word="$word $parse"
 				
 			if [[ $field != *","* ]]
@@ -75,8 +76,6 @@ do
 	add-entry "$word" "$pos" "$decl" "$mod" "$def"
 
 	#echo "$word \t $wtype \t $mod \t $def"
-	# add-entry $word $wtype $mod $def
 done < dictionary.txt
 
 # TODO progress bar
-# TODO prompt for user/pass

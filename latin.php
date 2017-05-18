@@ -13,7 +13,9 @@
 		die();
 	}
 
-	$pword = file_get_contents(".db-password.txt");
+    $pword = file_get_contents(".password.db");
+    $uname = file_get_contents(".username.db");
+    $dname = file_get_contents(".database.db");
 	$db = new mysqli("localhost", "techhound", $pword, "dict");
 
 	//echo "DB Error: ";
