@@ -13,15 +13,12 @@
 		die();
 	}
 
-    $pword = file_get_contents(".password.db");
-    $uname = file_get_contents(".username.db");
-    $dname = file_get_contents(".database.db");
-	$db = new mysqli("localhost", "techhound", $pword, "dict");
+    $pword = file_get_contents("./.password.db");
+    $uname = file_get_contents("./.username.db");
+    $dname = file_get_contents("./.database.db");
+	$db = new mysqli("localhost", $uname, $pword, $dname);
 
-	//echo "DB Error: ";
-	//echo $db->connect_error;
-	
-	$stmt = $db->prepare("SELECT * FROM latin WHERE word LIKE ? LIMIT 3 union SELECT * FROM latin WHERE word LIKE ? LIMIT 3"); //returns STMT obj
+    $stmt = $db->prepare("SELECT * FROM latin WHERE word LIKE ? LIMIT 3 union SELECT * FROM latin WHERE word LIKE ? LIMIT 3"); //returns STMT obj
 	
 	$query_input = $input."%";
 	$query_input_2 = "%".$input."%";
