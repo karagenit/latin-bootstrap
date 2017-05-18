@@ -92,7 +92,7 @@ This took me about an hour to get working, as I'd never worked with MySQL specif
 
 In particular, I found differences in my `/etc/my.cnf`. Specifically, I saw that many of the directory settings (which usually point to `/var/`) were pointing to `/mnt/ram4/var/`. Removing this prefix seemed to clear up my issue - I was immediately able to start the MySQL server.
 
-After that, I had a couple issues with permissions. First, obviously, I had to configure my user with access to all databases. I also had to remove the `old_passwords=1` line from `/etc/my.cnf` ... I'm not sure what that did, but the DB was complaining about it (and taking it out seemed to fix it).
+After that, I had a couple issues with permissions. First, obviously, I had to configure my user with access to all databases (and, well, create a new user). I also had to remove the `old_passwords=1` line from `/etc/my.cnf` ... I'm not sure what that did, but the DB was complaining about it (and taking it out seemed to fix it).
 
 #### Dictionary Database Configuration
 
@@ -153,3 +153,5 @@ The first of which has to do with MySQL and how I handled users/passwords. I tal
 You'll notice that in both the `.htaccess` and the `.gitignore` any file matching `*.db` is ignored/forbidden. These files are used to access the MySQL database. Specifically, `.username.db` holds the database username, `.password.db` holds that user's password, and `.database.db` holds the database name.
 
 #### Database Table Setup Script
+
+`CREATE DATABASE dict;`
