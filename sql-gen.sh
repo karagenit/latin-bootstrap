@@ -10,7 +10,7 @@ function add-entry {
 	decl=$3
 	mod=$4
 	def=$5
-	mysql -u $uname -p$pword -D $dname -e "INSERT INTO latin (id, word, part, declension, modifier, definition) VALUES (NULL, '$word', '$pos', '$decl', '$mod', '$def');"
+	mysql -u "$uname" -p"$pword" -D "$dname" -e "INSERT INTO latin (id, word, part, declension, modifier, definition) VALUES (NULL, '$word', '$pos', '$decl', '$mod', '$def');"
 }
 
 # TODO on startup, DELETE FROM latin
