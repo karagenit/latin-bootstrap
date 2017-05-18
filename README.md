@@ -135,3 +135,7 @@ Oh, and of course we have this gem:
 Adding that empty column for spacing ... *and* adding the offset class to the main column ... but for some reason, taking one out breaks it on either Desktop or Mobile. 
 
 Oh, and there's a `<p><br></p>` stuck in there cause I don't know how to use margins apparently.
+
+## Database Files
+
+You'll notice that in both the `.htaccess` and the `.gitignore` any file matching `*.db` is ignored/forbidden. These files are used to access the MySQL database. Specifically, `.username.db` holds the database username, `.password.db` holds that user's password, and `.database.db` holds the database name.
