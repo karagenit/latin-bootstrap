@@ -18,11 +18,12 @@
     $dname = file_get_contents("./.database.db");
 	$db = new mysqli("localhost", $uname, $pword, $dname);
 
-    $stmt = $db->prepare("SELECT * FROM latin WHERE word LIKE ? LIMIT 3 union SELECT * FROM latin WHERE word LIKE ? LIMIT 3"); //returns STMT obj
+    $stmt = $db->prepare("SELECT * FROM latin WHERE word LIKE ? LIMIT 3 union SELECT * FROM latin WHERE word LIKE ? LIMIT 3 union SELECT * FROM latin WHERE word LIKE ? LIMIT 3"); //returns STMT obj
 	
 	$query_input = $input."%";
-	$query_input_2 = "%".$input."%";
-	$stmt->bind_param('ss', $query_input, $query_input_2); //returns boolean
+    $query_input_2 = "% ".$input."%";
+    $query_input_3 = "%".$input."%";
+	$stmt->bind_param('sss', $query_input, $query_input_2, $query_input_3); //returns boolean
 
 	$stmt->execute(); //returns boolean
 
