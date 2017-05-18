@@ -152,6 +152,8 @@ The first of which has to do with MySQL and how I handled users/passwords. I tal
 
 You'll notice that in both the `.htaccess` and the `.gitignore` any file matching `*.db` is ignored/forbidden. These files are used to access the MySQL database. Specifically, `.username.db` holds the database username, `.password.db` holds that user's password, and `.database.db` holds the database name.
 
+> **Protip:** use `echo -n "password" > .password.db` etc. with the **-n** being the important bit - it prevents a newline from being added to the end of the file
+
 #### Database Table Setup Script
 
 `CREATE DATABASE dict;`
