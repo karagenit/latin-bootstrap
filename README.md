@@ -92,7 +92,7 @@ This took me about an hour to get working, as I'd never worked with MySQL specif
 
 In particular, I found differences in my `/etc/my.cnf`. Specifically, I saw that many of the directory settings (which usually point to `/var/`) were pointing to `/mnt/ram4/var/`. Removing this prefix seemed to clear up my issue - I was immediately able to start the MySQL server.
 
-After that, I had a couple issues with permissions. First, obviously, I had to configure my user with access to all databases. I also had to remove the `old_passwords=1` line from `/etc/my.cnf` ... I'm not sure what that did, but the DB was complaining about it (and taking it out seemed to fix it).
+After that, I had a couple issues with permissions. First, obviously, I had to configure my user with access to all databases (and, well, create a new user). I also had to remove the `old_passwords=1` line from `/etc/my.cnf` ... I'm not sure what that did, but the DB was complaining about it (and taking it out seemed to fix it).
 
 #### Dictionary Database Configuration
 
@@ -136,6 +136,32 @@ Adding that empty column for spacing ... *and* adding the offset class to the ma
 
 Oh, and there's a `<p><br></p>` stuck in there cause I don't know how to use margins apparently.
 
-## Database Files
+## A Great Migration
+
+Mere days before I was to present this project to my Latin class, the server on which I previously hosted the site was taken down (it's owner was moving and had everything unplugged). As a result, I was forced to migrate my project to the techhounds web server. While this was stressful, it ultimately made me realize some of the key issues with how I had things set up.
+
+#### Installing MySQL
+
+My previous server already had MySQL installed. However, the new server did not. 
+
+> **Protip:** installing `mysql` only installs the client, you also need to install `mysql-server`!
+
+#### Database Files
+
+The first of which has to do with MySQL and how I handled users/passwords. I talked about the security issue to hardcoding the password, but it's also inconvenient to hardcode usernames/database names etc.
 
 You'll notice that in both the `.htaccess` and the `.gitignore` any file matching `*.db` is ignored/forbidden. These files are used to access the MySQL database. Specifically, `.username.db` holds the database username, `.password.db` holds that user's password, and `.database.db` holds the database name.
+
+> **Protip:** use `echo -n "password" > .password.db` etc. with the **-n** being the important bit - it prevents a newline from being added to the end of the file
+
+#### Database Table Setup Script
+
+`CREATE DATABASE dict;`
+
+## The Easy Way
+
+After having to build the MySQL database for a second time, I realized there were a couple neat tricks that would make the process easier. 
+
+> **Protip:** use `screen` to run the `sql-gen` script in the background - when you disconnect from SSH, it won't stop building!
+
+> **Protip:** PHP stores logs in `/var/log/httpd` ... use them to your advantage!
